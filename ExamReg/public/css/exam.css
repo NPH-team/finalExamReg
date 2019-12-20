@@ -1,0 +1,72 @@
+.activated {
+    width: 100px;
+    background-color: #49ee75;
+}
+
+.deactivated {
+    width: 100px;
+    background-color: #f31313;
+}
+
+#maky {
+    border-width: 0px 0px 2px 0px;
+    border-color: black;
+    font-size: 20px; 
+    width: 350px; 
+    margin-right:100px;
+}
+
+#maca {
+    border: 1px black solid;
+    //float:left;
+    width: 110px;
+}
+
+#mahp {
+    border: 1px black solid;
+    //float:left;
+    width: 110px;
+}
+
+#tenhp {
+    border: 1px black solid;
+    //float:left;
+    width: 300px;
+}
+
+#TC {
+    border: 1px black solid;
+    //float:left;
+    width: 50px;
+}
+
+#SL {
+    border: 1px black solid;
+    //float:left;
+    width: 50px;
+}
+
+#ca {
+    border: 1px black solid;
+    //float:left;
+    width: 50px;
+}
+
+#timestart {
+    border: 1px black solid;
+    //float:left;
+    width: 120px;
+}
+
+#timeend {
+    border: 1px black solid;
+    //float:left;
+    width: 120px;
+}
+
+#diadiem {
+    border: 1px black solid;
+    //float: left; 
+    width: 175px;
+}
+
