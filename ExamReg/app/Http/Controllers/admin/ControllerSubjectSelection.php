@@ -80,7 +80,7 @@ class ControllerSubjectSelection extends Controller
         } else {
             //return json_encode(array('error'=>'Please provide data in file according to sample file.'));
             return redirect() -> back()
-                -> with(['errors' => [0 => 'Please provide data in file according to sample file.'.sizeof($collection[0])]]);
+                -> with(['errors' => [0 => 'Please provide data in file according to sample file.']]);
         }
         
         //return json_encode($result);

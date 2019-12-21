@@ -11,6 +11,7 @@
         <input type="hidden" id='oldmaky' name='oldmaky' value=<?php echo $exam->maky; ?> >
         <input type="text" id="maky" name="maky" placeholder='mã kỳ' value= <?php echo $exam->maky; ?> >
         <input type='text' readonly id='active' name='active' value= <?php echo $exam->active==0?'Deactivated':'Activated'?> class=<?php echo $exam->active==0?'deactivated':'activated'?>>
+        <button class='copy' id='copy'><i class="fa fa-clone" aria-hidden="true"></i>   Copy</button> 
         <button class='delete' id='delete'><span class='fa fa-times' aria-hidden='true' ></span>   Delete</button>
         <button type='submit' id='submitTests' value='Save'> Save</button>
     </form>
@@ -176,6 +177,11 @@
             });
         }
     });
+
+    $('#copy').click(function() {
+        maky = prompt('Nhập mã kỳ bạn muốn sao chép:');
+    });
+
 </script>
 
 

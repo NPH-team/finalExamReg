@@ -79,7 +79,23 @@
                         </ul>
                     </div>
                 </nav>
+                
                 <div class="maincontent" style="padding:0px 10px;">
+                    <div style='color: red; margin: -20px 0 20px 20px; '> 
+                        <?php    
+                            if (isset($_SESSION['semesters'])) {
+                                $hasActive= false;
+                                foreach ($_SESSION['semesters'] as $semester) {
+                                    if ($semester->active == 1) {
+                                        $hasActive = true;
+                                        echo "<h6> Kỳ thi $semester->maky đang mở..... </h6>";
+                                        break;
+                                    }
+                                }
+                                if (!$hasActive) echo "Không có kỳ thi nào đang mở";
+                            }
+                        ?>
+                    </div>
                     <section id="content">
                         @yield('content')
                     </section>
