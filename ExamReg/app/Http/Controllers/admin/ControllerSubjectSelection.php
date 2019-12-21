@@ -62,7 +62,11 @@ class ControllerSubjectSelection extends Controller
                     if ($selection != null || sizeof($collection[$row]) != 4) continue; //tested subject selection is exits or subject's data is error
                     
                     //import testes subject selection into database
-                    $modelTested->insertFromExcel($collection[$row]);
+                    try {
+                        $modelTested->insertFromExcel($collection[$row]);
+                    } catch(Exception $e) {
+                        
+                    }
 
                     //add tested subject selection into returned data
                     array_push($data, $collection[$row]);

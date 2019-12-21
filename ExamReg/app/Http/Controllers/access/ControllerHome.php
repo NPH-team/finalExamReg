@@ -12,7 +12,7 @@ class ControllerHome extends Controller
 {
     //return exams ~ semesters which were created
     public function getExam() {
-        $semesters = DB::select('select * from semesters');
+        $semesters = DB::table('semesters')->get()->toarray();
         return $semesters;
     }
 
@@ -31,6 +31,7 @@ class ControllerHome extends Controller
                 if ($_SESSION['level'] == 'admin') { //it is admin user
                     $semesters = $this->getExam();
                     $_SESSION['semesters'] = $semesters;
+                    //dd($_SESSION['semesters']);
                     return view('admin.home'); //->with('username', $_SESSION['login']); 
                     //echo "admin";
                 } else { //it is student user or not. if its not return with default //student home 

@@ -1,51 +1,57 @@
 <?php 
-    session_start();
+    //session_start();
 ?>
 
 @extends('admin.home')
 @section('content')
 
 <div class='examData' style="margin-left: 50px;">
-    <form id="testes" action="{{ url('/exam/{}')}}"  method="POST" enctype="multipart/form-data"> 
+    <form id="tests" action="{{ route('createExam')}}"  method="POST" enctype="multipart/form-data"> 
         {{ csrf_field() }}
+        <input type="hidden" id='oldmaky' name='oldmaky' value=<?php echo $exam->maky; ?> >
+        <input type="text" id="maky" name="maky" placeholder='mã kỳ' value= <?php echo $exam->maky; ?> >
+        <input type='text' readonly id='active' name='active' value= <?php echo $exam->active==0?'Deactivated':'Activated'?> class=<?php echo $exam->active==0?'deactivated':'activated'?>>
 
-        <input type="text" id="maky" placeholder='mã kỳ' value= <?php echo $exam[0]; ?> >
-        <input type='button' id='active' value= <?php echo $exam[1]==0?'Deactivated':'Activated'?> class=<?php echo $exam[1]==0?'deactivated':'activated'?>>
-        <br><br>
-        <?php
+        <button type='submit' id='submitTests' value='Save'> Save</button>
+    </form>
+        
+    <div>      
+        <?php 
+            //dd($tests);
             if ($tests){
                 foreach ($tests as $test){
-                    echo "<input type='text' placeholder='maca' id='maca' style='float:left;' value=".$test[1].">";
-                    echo "<input type='text' placeholder='mahp' id='mahp' style='' value=".$test[2].">";
-                    echo "<input type='text' placeholder='tenhp' id='tenhp' style='' value=".$test[3].">";
-                    echo "<input type='text' placeholder='TC' id='TC' style='' value=".$test[4].">";
-                    echo "<input type='text' placeholder='SL' id='SL' style='' value=".$test[5].">";
-                    echo "<input type='text' placeholder='ca' id='ca' style='' value=".$test[6].">";
-                    echo "<input type='date' placeholder='date' id='date' style='' value=".$test[7].">";
-                    echo "<input type='text' placeholder='timestart' id='timestart' style='' value=".$test[8].">";
-                    echo "<input type='text' placeholder='timeend' id='timeend' style='' value=".$test[9].">";
-                    echo "<input type='text' placeholder='diadiem' id='diadiem' style='clear:both' value=".$test[10].">";
-                    echo "<br>";
+                    
+                    echo "<form class='createTest' method='post' style='margin:20px 0 20px 0;'>";
+                    echo "<input type='hidden' id='maky' name='maky' placeholder='mã kỳ' value="."$exam->maky"." >";
+                    echo "<input type='hidden' readonly id='active' name='active' value=" . "$exam->active==0?'Deactivated':'Activated'" . "  class= ". "$exam->active==0?'deactivated':'activated'" . " >";
+                    echo "<input type='text' placeholder='maca' id='maca' name='maca' value='$test->maca' required>";
+                    echo "<input type='text' placeholder='mahp' id='mahp' name='mahp' value='$test->mahp' required>";
+                    echo "<input type='text' placeholder='tenhp' id='tenhp' name='tenhp' value='$test->tenhp' required>";
+                    echo "<input type='text' placeholder='TC' id='TC' name='TC' value='$test->TC' required>";
+                    echo "<input type='text' placeholder='SL' id='SL' name='SL' value='$test->SL' required>";
+                    echo "<input type='text' placeholder='ca' id='ca' name='ca' value='$test->ca' required>";
+                    echo "<input type='date' placeholder='date' id='date' name='date' value='$test->date' required>";
+                    echo "<input type='text' placeholder='timestart' id='timestart' name='timestart' value='$test->timestart' required>";
+                    echo "<input type='text' placeholder='timeend' id='timeend' name='timeend' value='$test->timeend' required>";
+                    echo "<input type='text' placeholder='diadiem' id='diadiem' name='diadiem' value='$test->diadiem' required>";
+                    echo "<span  class='fa fa-times' aria-hidden='true' id='remove' onclick='remove(this)'> </span>";
+                    echo "</form>";
                 }
             }
         ?>
 
-        <input type='text' placeholder='maca' id='maca' value=''>
-        <input type='text' placeholder='mahp' id='mahp' value=''>
-        <input type='text' placeholder='tenhp' id='tenhp' value=''>
-        <input type='text' placeholder='TC' id='TC' value=''>
-        <input type='text' placeholder='SL' id='SL' value=''>
-        <input type='text' placeholder='ca' id='ca' value=''>
-        <input type='date' placeholder='date' id='date' value=''>
-        <input type='text' placeholder='timestart' id='timestart' value=''>
-        <input type='text' placeholder='timeend' id='timeend' value=''>
-        <input type='text' placeholder='diadiem' id='diadiem' value=''>
-        <br><br>
+        <button type="button" id='newTest'>Create new</button> 
+    </div>
 
-        <input type='submit' id='submitTests' value='Save'>
-    </form>
-    <button type="button" id='newTest'>Create new</button> 
+    
+        
+    
+    
 </div>
+
+<?php
+    if (session('request')) dd(session('request'));
+?>
 
 <script>
     $('#active').click(function() {
@@ -61,23 +67,93 @@
     });
 
     $('#newTest').click(function() {
-        console.log('new');
-
-        var newInput = "<input type='text' placeholder='maca' id='maca' value=''>"
-                    + "<input type='text' placeholder='mahp' id='mahp' value=''>"
-                    + "<input type='text' placeholder='tenhp' id='tenhp' value=''>"
-                    + "<input type='text' placeholder='TC' id='TC' value=''>"
-                    + "<input type='text' placeholder='SL' id='SL' value=''>"
-                    + "<input type='text' placeholder='ca' id='ca' value=''>"
-                    + "<input type='date' placeholder='date' id='date' value=''>"
-                    + "<input type='text' placeholder='timestart' id='timestart' value=''>"
-                    + "<input type='text' placeholder='timeend' id='timeend' value=''>"
-                    + "<input type='text' placeholder='diadiem' id='diadiem' value=''>"
-                    + "<br><br>";
+        var newInput = "<form class='createTest' method='post' style='margin:20px 0 20px 0;'>"
+                        +"<input type='hidden' id='maky' name='maky' placeholder='mã kỳ' value= <?php echo $exam->maky; ?>>"
+                        +"<input type='hidden' readonly id='active' name='active' value= <?php echo $exam->active==0?'Deactivated':'Activated'?> class=<?php echo $exam->active==0?'deactivated':'activated'?>>"
+                        +"<input type='text' placeholder='maca' id='maca' name='maca'  required>"
+                        + "<input type='text' placeholder='mahp' id='mahp' name='mahp'  required>"
+                        + "<input type='text' placeholder='tenhp' id='tenhp' name='tenhp'  required>"
+                        + "<input type='text' placeholder='TC' id='TC' name='TC'  required>"
+                        + "<input type='text' placeholder='SL' id='SL' name='SL'  required>"
+                        + "<input type='text' placeholder='ca' id='ca' name='ca'  required>"
+                        + "<input type='date' placeholder='date' id='date' name='date'  required>"
+                        + "<input type='text' placeholder='timestart' id='timestart' name='timestart' required>"
+                        + "<input type='text' placeholder='timeend' id='timeend' name='timeend'  required>"
+                        + "<input type='text' placeholder='diadiem' id='diadiem' name='diadiem'  required>"
+                        + "<span  class='fa fa-times' aria-hidden='true' id='remove' onclick='remove(this)'> </span>"
+                        + "</form>";
         
-        //console.log
-        $('#submitTests').before(newInput);
+        //$('#submitTests').before(newInput);
+        $('#newTest').before(newInput);
     });
+
+    function remove(btn) {
+        child = btn.parentNode;
+        child.parentNode.removeChild(child);
+    }
+
+    $(document).ready(function(){
+        $("#tests").submit(function(){
+            console.log('submit');
+
+            //khoi tao lai gia tri exam~tests
+            var maky = "<?php echo $exam->maky; ?>";
+            var active = "<?php echo $exam->active==0?'Deactivated':'Activated'?>";
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{route('makeup')}}",
+                method:"POST", 
+                data:{maky:maky, active: active, _token:_token},
+                success:function(data){ 
+                    result = JSON.parse(data).result;
+                    console.log(result);
+                    importTests();
+                }
+            });
+            return true;
+        });
+    });
+
+
+    function importTests() {
+        var forms = $('.createTest');
+        console.log(forms);
+        if(forms) {
+            
+            for (i = 0; i < forms.length; ++i) {
+                console.log(forms[i][3].value);
+                
+                var maky = forms[i][0].value; if (maky == '') continue;
+                var active = forms[i][1].value; if (active == '') continue;
+                var maca = forms[i][2].value; if (maca == '') continue;
+                var mahp = forms[i][3].value; if (mahp == '') continue;
+                var tenhp = forms[i][4].value; if (tenhp == '') continue;
+                var TC = forms[i][5].value; if (TC == '') continue;
+                var SL = forms[i][6].value; if (SL == '') continue;
+                var ca = forms[i][7].value; if (ca == '') continue;
+                var date = forms[i][8].value; if (date == '') continue;
+                var timestart = forms[i][9].value; if (timestart == '') continue;
+                var timeend = forms[i][10].value; if (timeend == '') continue;
+                var diadiem = forms[i][11].value; if (diadiem == '') continue;
+
+                var _token = $('input[name="_token"]').val();
+
+                console.log('why?');
+
+                $.ajax({
+                    url:"{{route('createTest')}}",
+                    method:"POST", 
+                    data:{maky:maky, active: active, maca: maca, mahp: mahp, tenhp:tenhp, TC:TC, SL:SL, ca:ca, date:date, timestart:timestart, timeend:timeend, diadiem:diadiem, _token:_token},
+                    success:function(data){ 
+                        result = JSON.parse(data).result;
+                        console.log(result);
+                    }
+                });
+            }
+        }
+    }
+
 
 </script>
 

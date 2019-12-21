@@ -1,11 +1,13 @@
 .activated {
     width: 100px;
     background-color: #49ee75;
+    cursor: pointer;
 }
 
 .deactivated {
     width: 100px;
     background-color: #f31313;
+    cursor: pointer;
 }
 
 #maky {
@@ -17,56 +19,63 @@
 }
 
 #maca {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 110px;
 }
 
 #mahp {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 110px;
 }
 
 #tenhp {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 300px;
 }
 
 #TC {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 50px;
 }
 
 #SL {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 50px;
 }
 
 #ca {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 50px;
+}
+#date {
+    border: 1px 0px 1px 1px black solid;
+    height: 29px;
 }
 
 #timestart {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 120px;
 }
 
 #timeend {
-    border: 1px black solid;
-    //float:left;
+    border: 1px 0px 1px 1px black solid;
     width: 120px;
 }
 
 #diadiem {
     border: 1px black solid;
-    //float: left; 
     width: 175px;
 }
+#remove {
+    width: 50px;
+    color: red;
+    cursor: pointer;
+    margin-left:15px;
+}
 
+#submitTests {
+    display: block;
+    margin: 20px 0 20px 0;
+    width: 100px;
+
+}

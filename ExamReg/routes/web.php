@@ -48,8 +48,11 @@ Route::post('/subject/notested', 'admin\ControllerSubjectSelection@importNoTeste
 
 
 /**create exam */
+Route::get('/exam', 'admin\ControllerExam@getCreateExam');
+Route::post('/exam', 'admin\ControllerExam@createExam');
 Route::get('/exam/{maky}', 'admin\ControllerExam@showExam');
-
-
+Route::post('/exam/makeup', 'admin\ControllerExam@makeupExam') -> name('makeup');
+Route::post('/exam/addtest', 'admin\ControllerExam@importTestsData') -> name('createTest');
+Route::post('/exam/addexam', 'admin\ControllerExam@importExam') -> name('createExam');
 
 /** student */

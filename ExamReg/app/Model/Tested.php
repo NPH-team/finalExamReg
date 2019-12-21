@@ -30,12 +30,14 @@ class Tested extends Model
     }
 
     public function insertFromExcel($data) {
-        DB::table('tested')->insert([
-            [
-                'maky' => $data[1],
-                'msv' => $data[2],
-                'mahp' => $data[3],
-            ],
-        ]);
+        try {
+            DB::table('tested')->insert([
+                [
+                    'maky' => $data[1],
+                    'msv' => $data[2],
+                    'mahp' => $data[3],
+                ],
+            ]);
+        } catch(Exception $e) { return;}
     }
 }

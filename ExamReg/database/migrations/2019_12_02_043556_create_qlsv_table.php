@@ -42,14 +42,14 @@ class CreateQlsvTable extends Migration
         /** Semester */
         Schema::create('semesters', function (Blueprint $table) {
             $table->string('maky', 25)->primary();
-            $table->integer('active');
+            $table->string('active');
         });
 
         /** Subjects */
         Schema::create('subjects', function (Blueprint $table) {
             $table->string('mahp', 15) -> primary();
             $table->string('tenhp', 50);
-            $table->integer('TC');
+            $table->string('TC');
         });
         
         /** Exams */
@@ -58,9 +58,9 @@ class CreateQlsvTable extends Migration
             $table->string('maca',20);
             $table->string('mahp', 15);
             $table->string('tenhp', 50);
-            $table->integer('TC');
-            $table->integer('SL');
-            $table->integer('ca');
+            $table->string('TC');
+            $table->string('SL');
+            $table->string('ca');
             $table->string('date');
             $table->string('timestart');
             $table->string('timeend');
@@ -116,6 +116,9 @@ class CreateQlsvTable extends Migration
             $table->foreign('msv')->references('msv')->on('students');
             $table->foreign(['maky','maca'])->references(['maky','maca'])->on('exams');
         });
+
+
+        
 
     }
 

@@ -37,10 +37,10 @@
                     <div id='exam' class='none'>
                         @if (isset($_SESSION['semesters']))
                             @foreach ($_SESSION['semesters'] as $semester)
-                            <a href="exam/".{{ $semester[0] }} id='exams' class="list-group-item list-group-item-action" style="background-color: #c1e1d1;font-family: 'Times New Roman';color:black; font-size: 17px;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp; {{ $semester[0] }}</a>
+                            <a href="exam/{{$semester->maky}}" id='exams' class="list-group-item list-group-item-action" style="background-color: #c1e1d1;font-family: 'Times New Roman';color:black; font-size: 17px;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp; {{ $semester->maky }}</a>
                             @endforeach
                         @endif
-                        <a href="exam/new" id='exams' class="list-group-item list-group-item-action" style="background-color: #c1e1d1;font-family: 'Times New Roman';color:black; font-size: 17px; padding : 10px 0 10px 20px;"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp; New Exam</a>
+                        <a href="exam" id='exams' class="list-group-item list-group-item-action" style="background-color: #c1e1d1;font-family: 'Times New Roman';color:black; font-size: 17px; padding : 10px 0 10px 20px;"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp; New Exam</a>
 
                     </div>
 

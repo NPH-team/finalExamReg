@@ -18,6 +18,8 @@ class Exam extends Model
         'tenhp',
         'TC',
         'SL',
+        'ca',
+        'date',
         'timestart',
         'timeend',
         'diadiem'
@@ -39,6 +41,23 @@ class Exam extends Model
         return $this->belongsTo('App\Model\Semester');
     }
 
+    public function insert($request) {
+        DB::table('exams')->insert([
+            [
+                'maky' => $request->maky,
+                'maca' => $request->maca,
+                'mahp' => $request->mahp,
+                'tenhp' => $request->tenhp,
+                'TC' => $request->TC,
+                'SL' => $request->SL,
+                'ca' => $request->ca,
+                'date' => $request->date,
+                'timestart' => $request->timestart,
+                'timeend' => $request->timeend,
+                'diadiem' => $request->diadiem
+            ],
+        ]);
+    }
 /*
     public function getTableColumns() {
         $qry = "SELECT column_name
