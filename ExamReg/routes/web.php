@@ -48,11 +48,20 @@ Route::post('/subject/notested', 'admin\ControllerSubjectSelection@importNoTeste
 
 
 /**create exam */
+//create new semester
 Route::get('/exam', 'admin\ControllerExam@getCreateExam');
 Route::post('/exam', 'admin\ControllerExam@createExam');
+//tests ~ exam
 Route::get('/exam/{maky}', 'admin\ControllerExam@showExam');
+//import tests
 Route::post('/exam/makeup', 'admin\ControllerExam@makeupExam') -> name('makeup');
 Route::post('/exam/addtest', 'admin\ControllerExam@importTestsData') -> name('createTest');
+//import exam ~ rename, activate/deactivate
 Route::post('/exam/addexam', 'admin\ControllerExam@importExam') -> name('createExam');
+//delete exam
+Route::post('/exam/deleteExam', 'admin\ControllerExam@deleteExam') -> name('deleteExam');
+
+/**export exam's data */
+Route::get('/testlist', 'admin\ControllerExamSelection@getTestList');
 
 /** student */

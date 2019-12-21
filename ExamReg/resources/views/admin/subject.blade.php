@@ -44,7 +44,7 @@
     <a href="{{ url('/sample/NoTested.xlsx') }}" style="margin-top:0px; display: block"> Download Sample </a>
 </div>
 
-<div class="errorImport" style="margin-left:25px; clear: both">
+<div class="errorImport" style="margin:0 0 20px 50px; clear: both">
     @if (session('errors'))
         @foreach ($errors as $error)
             <li style="color:red;"> {{ $error }}</li>
@@ -62,7 +62,7 @@
 </div>
 
 
-<div class="acceptedSubject" style="margin:20px 30px 30px 20px;">
+<div class="acceptedSubject" style="margin:0px 30px 0px 30px;">
     <table border="1px" width="100%" id="loadata" class="table-responsive-md" style="font-family: 'times new roman';">
     @if (session('success'))
         <b>Danh sách học phần được thêm vào thành công </b>
@@ -86,7 +86,7 @@
     </table>
 </div>
 
-<div class="acceptedTested" style="margin:20px 30px 30px 20px;">
+<div class="acceptedTested" style="margin:0px 30px 0px 30px;">
     <table border="1px" width="100%" id="loadata" class="table-responsive-md" style="font-family: 'times new roman';">
     @if (session('successTested'))
         <b>Danh sách học phần sinh viên đủ điều kiện thi </b>
@@ -110,7 +110,7 @@
     </table>
 </div>
 
-<div class="acceptedNoTested" style="margin:20px 30px 30px 20px;">
+<div class="acceptedNoTested" style="margin:0px 30px 30px 30px;">
     <table border="1px" width="100%" id="loadata" class="table-responsive-md" style="font-family: 'times new roman';">
     @if (session('successNoTested'))
         <b>Danh sách học phần sinh viên không đủ điều kiện thi </b>
