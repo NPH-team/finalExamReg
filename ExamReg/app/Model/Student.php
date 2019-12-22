@@ -93,5 +93,13 @@ class Student extends Model
     public function find($msv){
         return Students::where('msv', $msv)->first();
     }
+    public function listSubcribe($mssv)
+	{
+		// $this->db->select('*');
+		// $this->db->where('mssv', $mssv);
+		// $dulieu=$this->db->get('danhsachdadangki');
+		$dulieu=DB::table('tested')->where('msv',$mssv)->get();
+		return $dulieu;
+	}						
     
 }

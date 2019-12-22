@@ -48,7 +48,8 @@ class ControllerLogin extends Controller
             //user is student ?!
             $student = Student::where([['username', $request->username], ['password', $password]])->first();
             if ($student != null) { //it is student user
-                $_SESSION['login'] = $student->ten;
+               
+                $_SESSION['login'] = $student->username;
                 $_SESSION['level'] = 'student';
                 $result = json_encode(array('result'=>'correct'));
                 return $result;

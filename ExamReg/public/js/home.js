@@ -7,7 +7,8 @@ $(document).ready(function() {
                 data.push({
                     date: $(this).attr("data-date"),
                     ca: $(this).attr("data-ca"),
-                    maca: $(this).attr("data-maca")
+                    maca: $(this).attr("data-maca"),
+                    tenhp: $(this).attr("data-tenhp")
                 })
             }
         });
@@ -34,31 +35,4 @@ $(document).ready(function() {
             }
         });
     })
-    var r = document.getElementById("loadata").rows;
-    for (i = 1; i < r.length; i++) {
-        a = r[i].cells[1].getElementsByClassName('ngay');
-        // console.log(a);
-        for (let j = 1; j < r[i].cells.length; j++) {
-
-            // console.log(r[i].cells[3].firstChild.nodeValue);
-            let check = r[i].cells[0].getElementsByClassName('choose');
-            // console.log(check[0].checked);
-            r[i].cells[j].onclick = function() {
-                // if (check[0] == true) check[0] = false;
-                // else check[0] = true;
-                check[0].click();
-                if (check[0].checked) {
-
-                }
-            };
-        }
-    }
-    // var refTab = document.getElementById("loadata")
-    // var ttl;
-    // for (var i = 1; row = refTab.rows[i]; i++) {
-    //     row = refTab.rows[i];
-    //     for (var j = 1; col = row.cells[j]; j++) {
-    //         console.log(col.firstChild.nodeValue);
-    //     }
-    // }
-});
+})

@@ -56,3 +56,21 @@ Route::post('/exam/addtest', 'admin\ControllerExam@importTestsData') -> name('cr
 Route::post('/exam/addexam', 'admin\ControllerExam@importExam') -> name('createExam');
 
 /** student */
+
+Route::get('/home', function () {
+    return view('templates.home');
+});
+Route::get('/inlich', function () {
+    return view('templates.inlich');
+});
+Route::get('/loadata','UserController@index');
+Route::get('/pdf','UserController@generate');
+Route::get('/print','UserController@print');
+Route::get('/demo', function () {
+    return view('templates.pdf');
+});
+Route::post('/store', 'UserController@store');
+Route::group(['prefix' => 'schedule'], function () {
+    Route::get('/', ['as' => 'schedule.show', 'uses' => 'UserController@index1']);
+    Route::get('/checkSameSchedule', ['as' => 'schedule.checkSameSchedule', 'uses' => 'UserController@checkSameSchedule']);
+});

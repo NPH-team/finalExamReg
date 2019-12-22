@@ -10,10 +10,11 @@ class Exam_Selection extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = [
-        'maky',
+    protected $fillable = [   
         'msv',
+        'maky',
         'maca'
+      
     ];
 
     public function student() {
@@ -27,4 +28,5 @@ class Exam_Selection extends Model
     public function semester() {
         return $this->belongsToMany('App\Model\Semester');
     }
+    
 }

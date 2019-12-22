@@ -1,37 +1,61 @@
 @extends('templates.home')
 @section('content')
-
-    <table border="1px" width="100%" id="loadata" class="table-responsive-md"
-           style="margin-top: 50px;font-family: 'times new roman';">
-        <tr>
-            <th style="text-align: center;">Số thứ tự</th>
-            <th style="text-align: center;"></th>
-            <th style="text-align: center;">Mã kỳ</th>
-            <th style="text-align: center;">Mã ca</th>
-            <th style="text-align: center;">Tên học phần</th>
-            <th style="text-align: center;">Số lượng</th>
-            <th style="text-align: center;">Ngày thi</th>
-            <th style="text-align: center;">Giờ bắt đầu</th>
-            <th style="text-align: center;">Giờ kết thúc</th>
-            <th style="text-align: center;">Địa điểm</th>
-
-        </tr>
-        @foreach($examinations as $key => $examination)
-            <tr data-date = "{{ $examination->date }}" data-ca = "{{ $examination->ca }}" data-maca = "{{ $examination->maca }}">
-                <td style="text-align: center;">{{ $key + 1 }}</td>
-                <td style="text-align: center;"><input type="checkbox" class="choose"></td>
-                <td style="text-align: center;">{{$examination->maky}}</td>
-                <td style="text-align: center;">{{$examination->maca}}</td>
-                <td style="text-align: center;">{{$examination->tenhp}}</td>
-                <td style="text-align: center;">{{$examination->sl}}</td>
+		<div class="form_dangky">
+	  	<form >
+			<table id = "tb1" class="table center" border="1px" style="font-family: 'Times new roman'">
+				<thead>
+				   
+					<th>Mã ca thi</th>
+                    <th>Mã môn học</th>
+                    <th>Tên môn học</th>
+					<th>Ca thi</th>
+					<th>Phòng thi</th>
+					<th>Ngày thi</th>
+                    <th>Giờ bắt đầu</th>
+                    <th>Giờ kết thúc</th>
+                    <th>Số lượng</th>
+					<th>Tín chỉ</th>
+					<th>Mã kì</th>
+					<th>Đăng kí</th>
+				
+				</thead>
+				<tbody id="dtd">
+                @foreach($examinations as $key => $examination)
+            <tr class="row_sb" data-date = "{{ $examination->date }}" data-ca = "{{ $examination->ca }}" data-maca = "{{ $examination->maca }}" data-tenhp="{{$examination->tenhp}}">
+			
+				<td style="text-align: center;" class="maca">{{ $examination->maca}}</td>
+                <td style="text-align: center;" class="mon">{{$examination->mahp}}</td>
+                <td style="text-align: center;" class="mon">{{$examination->tenhp}}</td>
+                <td style="text-align: center;" >{{$examination->ca}}</td>
+                <td style="text-align: center;">{{$examination->diadiem}}</td>
                 <td style="text-align: center;" class="ngay">{{$examination->date}}</td>
                 <td style="text-align: center;">{{$examination->timestart}}</td>
                 <td style="text-align: center;">{{$examination->timeend}}</td>
-                <td style="text-align: center;">{{$examination->diadiem}}</td>
+                <td style="text-align: center;" class="total">{{$examination->SL}}</td>
+				<td style="text-align: center;" class="count">{{$examination->TC}}</td>
+				<td style="text-align: center;" class="maki">{{ $examination->maky}}</td>
+                <td style="text-align: center;" class="nut"><input id = "action" class="chon" type="checkbox" name="gender"></td>
             </tr>
         @endforeach
-    </table>
-    <button type="submit" value="submit" id="submit" style="float: right; margin-top:5px; background-color: green;">Ghi
-        nhận
-    </button>
+				</tbody>
+			</table>
+		</form> 
+		<br><br>
+		<form action="" method="post" enctype="multidata/form-data" class="a">
+			<table class="ketqua" class="table center" width=100% border="1px" style="font-family: 'Times new roman'">
+				<thead class="center">
+					<th>Mã ca thi</th>
+					<th>Môn học</th>
+					<th>Mã môn học</th>
+					<th>Ca thi</th>
+					<th>Mã kì</th>
+					<th>Phòng thi</th>
+					<th>Ngày thi</th>
+					<th>Hủy môn</th>
+				</thead>
+	        </table> 
+		</form>
+		<input onclick="myfunction()" type="submit" id = "button_dangky"class="btn btn-success" value="Ghi nhận" name="">
+	</div>
+	
 @endsection
