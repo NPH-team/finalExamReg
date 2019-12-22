@@ -61,12 +61,6 @@ class ControllerExam extends Controller
         
         //$tests = DB::select('select * from exams where maky = '.$maky);
         $exam = DB::select('select * from semesters where maky = :maky', ['maky' => $maky]);
-        /*if (!$exam) {
-            $exam[0]['maky'] = 'new';
-            $exam[0]['active'] = 0;
-            $exam[0] = (object)$exam[0];
-        } */
-
         if (!$exam) {
             return redirect('/exam');
         }
@@ -123,9 +117,17 @@ class ControllerExam extends Controller
             ->where('maky', $request->oldmaky)
             ->update(['maky' => $request->maky]);
 
+        DB::table('tested')
+            ->where('maky', $request->oldmaky)
+            ->update(['maky'=> $request->maky]);
+
+        DB::table('notested')
+            ->where('maky', $request->oldmaky)
+            ->update(['maky'=> $request->maky]);
+
         //delete the old exam
         //DB::delete('delete from semesters where maky = '.$request->oldmaky);
-        DB::delete('delete form semesters where maky=:maky', ['maky'=>$request->oldmaky]);
+        DB::delete('delete from semesters where maky=:maky', ['maky'=>$request->oldmaky]);
     }
 
     //copy the current exam
@@ -150,19 +152,16 @@ class ControllerExam extends Controller
         }
     }
 
-    //add test into exam
-    public function addTest(Request $request) {
-
-    }
-
-    //delete test in exam
-    public function deleteTest() {
-
-    }
-
-    //update test in exam
-    public function updateTest($request) {
-       
+    public function deleteExam(Request $request) {
+        try {
+            DB::table('exams')->where('maky', $request->maky)->delete();
+            DB::table('semesters')->where('maky', $request->maky)->delete();
+            $result = json_encode(array('result'=>'delete'));
+            return $reslut;
+        } catch(Exception $e) {
+            $result = json_encode(array('result'=>$e->getMessage()));
+            return $result;
+        }
     }
 
     public function checkExam($maky) {
@@ -181,11 +180,8 @@ class ControllerExam extends Controller
         return $result;
     }
 
+
     public function importTestsData(Request $request) {
-        
-        //$test = Exam::where([['maky', $request->maky], ['maca', $request->maca]])->delete();
-        //DB::table('exams')->where('maky', $request->maky)->where('maca', $request->maca)->delete();
-        
         DB::table('exams')->insert([
             [
                 'maky' => $request->maky,
@@ -203,18 +199,10 @@ class ControllerExam extends Controller
         ]);
 
         $result = json_encode(array('result'=>'success'));
-        //$result = json_encode(array('result'=>$request->diadiem));
-
         return $result;
     }
 
     public function importExam(Request $request) {
-        
-        //$semester = Semester::where(['maky',$request->oldmaky]);
-        /*
-        $semester = DB::select('select * from semesters where maky= :maky', ['maky' => $request->oldmaky]);
-        if (!$semester) $this->getCreateExam($request->oldmaky);
-        */
         if ($request->oldmaky != $request->maky) {
             $this->renameExams($request);
         } else {

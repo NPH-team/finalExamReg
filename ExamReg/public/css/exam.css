@@ -79,3 +79,16 @@
     width: 100px;
 
 }
+
+.copy {
+    color: green;
+    width: 100px;
+    font-size: 17px;
+    margin-left: 50px;
+}
+
+.delete {
+    color: red;
+    font-size: 17px;
+    margin-left: 50px;
+}

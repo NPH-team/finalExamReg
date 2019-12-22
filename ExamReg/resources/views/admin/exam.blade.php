@@ -11,7 +11,8 @@
         <input type="hidden" id='oldmaky' name='oldmaky' value=<?php echo $exam->maky; ?> >
         <input type="text" id="maky" name="maky" placeholder='mã kỳ' value= <?php echo $exam->maky; ?> >
         <input type='text' readonly id='active' name='active' value= <?php echo $exam->active==0?'Deactivated':'Activated'?> class=<?php echo $exam->active==0?'deactivated':'activated'?>>
-
+        <button class='copy' id='copy'><i class="fa fa-clone" aria-hidden="true"></i>   Copy</button> 
+        <button class='delete' id='delete'><span class='fa fa-times' aria-hidden='true' ></span>   Delete</button>
         <button type='submit' id='submitTests' value='Save'> Save</button>
     </form>
         
@@ -154,6 +155,32 @@
         }
     }
 
+    $('#delete').click(function() {
+        val = confirm('Có chắc là xóa kỳ thi này?');
+        if (val == true) {
+            var maky = "<?php echo $exam->maky; ?>";
+            var active = "<?php echo $exam->active==0?'Deactivated':'Activated'?>";
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{route('deleteExam')}}",
+                method:"POST", 
+                data:{maky:maky, active: active, _token:_token},
+                success:function(data){ 
+                    console.log(jkdls);
+                    result = JSON.parse(data).result;
+                    console.log(result);
+                    if (result == 'success') {
+                        window.location = "/exam";
+                    } else alert(result);
+                }
+            });
+        }
+    });
+
+    $('#copy').click(function() {
+        maky = prompt('Nhập mã kỳ bạn muốn sao chép:');
+    });
 
 </script>
 

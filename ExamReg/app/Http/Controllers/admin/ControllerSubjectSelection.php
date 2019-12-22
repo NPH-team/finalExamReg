@@ -80,7 +80,7 @@ class ControllerSubjectSelection extends Controller
         } else {
             //return json_encode(array('error'=>'Please provide data in file according to sample file.'));
             return redirect() -> back()
-                -> with(['errors' => [0 => 'Please provide data in file according to sample file.'.sizeof($collection[0])]]);
+                -> with(['errors' => [0 => 'Please provide data in file according to sample file.']]);
         }
         
         //return json_encode($result);
@@ -116,7 +116,7 @@ class ControllerSubjectSelection extends Controller
                 try {
                     //check notested subject selection is exist in data or not?
                     //$selection = DB::select('select * from notested where maky = '.$collection[$row][1].'and msv = '.$collection[$row][2].'and mahp = '.$collection[$row][3]);
-                    $selection = Tested::where([['maky', $collection[$row][1]], ['msv', $collection[$row][2]], ['mahp', $collection[$row][3]]])->first();
+                    $selection = NoTested::where([['maky', $collection[$row][1]], ['msv', $collection[$row][2]], ['mahp', $collection[$row][3]]])->first();
 
                     if ($selection != null || sizeof($collection[$row]) != 4) continue; //notested subject selection is exits or subject's data is error
                     
